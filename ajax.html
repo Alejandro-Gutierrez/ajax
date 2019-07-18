@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ajax</title>
+
+    <style>
+        #sube{
+            border: 1px solid red;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <button id="bntcargar">Cargar paises</button>
+    <div id="sube">
+
+    </div>
+    <script>
+        var baja=document.getElementById("sube");
+        var btcargar=document.getElementById("bntcargar");
+        var a="";
+        btcargar.addEventListener("click",trae);
+
+        function trae(){
+            fetch("https://restcountries.eu/rest/v2/all")
+            .then(function(response){
+
+                return response.json();
+
+            }).then(function(data){
+                console.log(data)
+                
+                for(i=0; i<data.length; i++){
+                    
+                    a+="<p> Pais: "+ data[i].name+"</p>";
+                    a+="<img src='"+data[i].flag+"'width='100px' heigth='100px'>";
+                }
+                baja.innerHTML=a;
+
+            }).catch(function(error){
+                console.log(error);
+            })
+        }
+        
+
+
+
+    
+    
+    
+    </script>
+</body>
+</html>
